@@ -6,6 +6,12 @@ add_definitions(-DASIO_STANDALONE -DUSE_STANDALONE_ASIO)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+if(DEFINED ENV{QT_DIR})
+    set(Qt5_DIR "$ENV{QT_DIR}/lib/cmake/Qt5" CACHE PATH "Initial cache" FORCE)
+else()
+    message(FATAL_ERROR "QT_DIR environment variable is not set.")
+endif()
+
 find_package(Qt5 COMPONENTS Core Sql REQUIRED)
 link_libraries(Qt5::Core Qt5::Sql)
 
